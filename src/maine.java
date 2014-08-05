@@ -57,13 +57,19 @@ public class maine {
 	private static void displayMatchup() throws IOException {
 		System.out.print("Enter player name: ");
 		String name = br.readLine();
+		int wins;
+		int losses;
 		int id = getPlayerId(name);
 		if (id == -1) {
 			System.out.println("Invalid player name");
 		} else {
 			Player p = players.get(id);
-			for (int i = 0; i < p.getWins().size(); i++) {
-				
+			for (int i = 0; i < players.size(); i++) {
+				wins = p.getWinsAgainst(i);
+				losses = players.get(i).getWinsAgainst(id);
+				if (wins != 0 || losses != 0) {
+					System.out.println("vs. " + players.get(i).getName() + ": " + wins + " - " + losses);
+				}
 			}
 		}
 	}
